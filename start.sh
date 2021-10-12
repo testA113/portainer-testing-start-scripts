@@ -5,9 +5,9 @@
 # create the cluster and open some ports
 sudo k3d cluster create portainer --api-port 6443 --servers 1 --agents 1 -p "30750-30800:30750-30800@server[0]"
 # start portainer using the manifest
-sudo kubectl apply -f ~/Desktop/portainer/manual-testing/kubernetes/portainer-ee.yml
+sudo kubectl apply -f https://raw.githubusercontent.com/testA113/start-scripts/main/portainer29.yaml
 # start the agent
-sudo kubectl apply -f ~/Desktop/portainer/manual-testing/kubernetes/portainer-agent-k8s.yaml
+sudo kubectl apply -f https://raw.githubusercontent.com/testA113/start-scripts/main/portainer-agent-k8s.yaml
 # get the ip and port of the agent to add to the instance as an agent endpoint
 clusterIp=$(sudo kubectl -n portainer get all | grep service/portainer-agent | head -n 1 | awk '{print $3}')
 port=$(sudo kubectl -n portainer get all | grep service/portainer-agent | head -n 1 | awk '{print $5}' | awk -F  ":" '/1/ {print $1}')
